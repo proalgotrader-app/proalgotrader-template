@@ -1,6 +1,12 @@
-### ProAlgoTrader
+# ProAlgoTrader
 
-This is a default template for your strategy.
+https://www.proalgotrader.com
+
+```
+This is a default template for ProAlgoTrader strategy.
+
+To get started, follow simple step given below.
+```
 
 ## Step 1
 
@@ -40,9 +46,7 @@ trader_cli run <PROJECT_ID> <MODE>
 MODE can be Paper or Live.
 ```
 
-## Step 5
-
-Available `trader_cli` commands
+## Available commands
 
 ```bash
 trader_cli login
