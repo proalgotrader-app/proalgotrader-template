@@ -10,7 +10,7 @@ class Strategy(Algorithm_Protocol):
     async def initialize(self):
         self.set_account_type(AccountType.DERIVATIVE_INTRADAY)
 
-        self.nifty = self.add_future("NIFTY", ("monthly", 0))
+        self.nifty = self.add_equity("NIFTY")
 
         self.nifty_chart = await self.add_chart(
             self.nifty, timedelta(minutes=5)
@@ -28,6 +28,14 @@ class Strategy(Algorithm_Protocol):
             "sma_50", lambda data: ta.sma(close=data.close, length=50)
         )
     
+    @property
+    def nifty_ce(self) -> None:
+        return self.nifty.add_option(("weekly", 0), 0, "CE")
+    
+    @property
+    def nifty_pe(self) -> None:
+        return self.nifty.add_option(("weekly", 0), 0, "PE")
+    
     def crossover(sma1, sma2):
         return (sma1.iloc[-1] > sma2.iloc[-1]) and (
             sma1.iloc[-2] < sma2.iloc[-2]
@@ -37,10 +45,12 @@ class Strategy(Algorithm_Protocol):
         sma_20 = self.sma_20.data["SMA_20"]
         sma_50 = self.sma_50.data["SMA_50"]
 
-        crossover = self.crossover(sma_20, sma_50)
+        bullish_crossover = self.crossover(sma_20, sma_50)
+        bearish_crossover = self.crossover(sma_50, sma_20)
 
-        if crossover:
-          if not self.open_positions:
-              await self.buy(symbol=self.nifty_ce, quantities=50)
-          else:
-              await self.buy(symbol=self.nifty_ce, quantities=50)
+        if not self.open_positions:
+            if bullish_crossover:
+                await self.buy(symbol=self.nifty_ce, quantities=50)
+
+            if bearish_crossover:
+                await self.buy(symbol=self.nifty_pe, quantities=50)
