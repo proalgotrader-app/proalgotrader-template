@@ -30,11 +30,11 @@ class Strategy(Algorithm_Protocol):
     
     @property
     def nifty_ce(self) -> None:
-        return self.nifty.add_option(("weekly", 0), 0, "CE")
+        return self.add_option("NIFTY", ("weekly", 0), 0, "CE")
     
     @property
     def nifty_pe(self) -> None:
-        return self.nifty.add_option(("weekly", 0), 0, "PE")
+        return self.add_option("NIFTY", ("weekly", 0), 0, "PE")
     
     def crossover(sma1, sma2):
         return (sma1.iloc[-1] > sma2.iloc[-1]) and (
