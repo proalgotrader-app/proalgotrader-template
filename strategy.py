@@ -29,7 +29,9 @@ class Strategy(Algorithm_Protocol):
         )
     
     def crossover(sma1, sma2):
-        return True
+        return (sma1.iloc[-1] > sma2.iloc[-1]) and (
+            sma1.iloc[-2] < sma2.iloc[-2]
+        )
     
     async def next(self):
         sma_20 = self.sma_20.data["SMA_20"]
