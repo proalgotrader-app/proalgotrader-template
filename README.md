@@ -8,7 +8,7 @@ This is a default template for ProAlgoTrader strategy.
 To get started, follow simple step given below.
 ```
 
-## Step 1
+### Step 1
 
 Clone strategy
 
@@ -18,7 +18,7 @@ git clone <PROJECT_REPOSITORY_URL> <PROJECT_DIRECTORY>
 
 You can find your PROJECT_REPOSITORY_URL from ProAlgoTrader Project Dashboard.
 
-## Step 2
+### Step 2
 
 Create a virtual environment
 
@@ -28,7 +28,7 @@ cd <PROJECT_DIRECTORY>
 python -m venv .venv
 ```
 
-## Step 3
+### Step 3
 
 Install required packages
 
@@ -36,7 +36,7 @@ Install required packages
 pip install -r requirements.txt
 ```
 
-## Step 4
+### Step 4
 
 Run strategy
 
